@@ -27,7 +27,7 @@ let PostsController = exports.PostsController = class PostsController {
     }
     findOne(id) {
         console.log(id);
-        return `This action returns a #${id} cat`;
+        return `This action returns a #${id} post`;
     }
 };
 __decorate([

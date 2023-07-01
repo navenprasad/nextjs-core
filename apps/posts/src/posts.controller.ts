@@ -17,6 +17,6 @@ export class PostsController {
   @Get(':id')
   findOne(@Param('id') id: string): string {
     console.log(id);
-    return `This action returns a #${id} cat`;
+    return `This action returns a #${id} post`;
   }
 }
