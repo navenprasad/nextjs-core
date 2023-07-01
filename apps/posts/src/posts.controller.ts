@@ -1,17 +1,22 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { PostsService } from './posts.service';
 
 @Controller()
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
-  @Post()
-  createPost(): string {
-    return this.postsService.createPost();
+  @Get()
+  getPosts(): string {
+    return 'This returns all posts';
   }
 
-  @Get()
-  getAllPosts(): string {
-    return this.postsService.getAllPosts();
+  @Post()
+  createPost(): string {
+    return 'This creates a post';
+  }
+  @Get(':id')
+  findOne(@Param('id') id: string): string {
+    console.log(id);
+    return `This action returns a #${id} cat`;
   }
 }
