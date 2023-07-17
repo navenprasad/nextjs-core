@@ -9,11 +9,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostsService = void 0;
 const common_1 = require("@nestjs/common");
 let PostsService = exports.PostsService = class PostsService {
-    createPost() {
-        return 'Post created';
+    constructor() {
+        this.tempPost = {
+            id: 1,
+            title: 'This is a title',
+            content: 'This is the content',
+        };
+        this.posts = [this.tempPost];
     }
-    getAllPosts() {
-        return 'All posts';
+    findAll() {
+        return this.posts;
+    }
+    create(post) {
+        this.posts.push(post);
+    }
+    findOne(id) {
+        const a = this.posts.find((post) => post.id == id);
+        console.log(a);
+        return this.posts.find((post) => post.id == id);
     }
 };
 exports.PostsService = PostsService = __decorate([
