@@ -33,4 +33,5 @@ export class PostsService {
     this.posts[index] = post;
     console.log(this.posts[index]);
   }
+
 }
