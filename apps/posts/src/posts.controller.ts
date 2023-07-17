@@ -23,31 +23,28 @@ export class PostsController {
     return allPosts;
   }
 
-  // @Post()
-  // createPost(@Req() req, @Body() createPostDto: CreatePostDto): string {
-  //   // console.log('This is from createPostDto: ', createPostDto);
-  //   // console.log('This is from req.body: ', req.body);
+  @Post()
+  createPost(@Body() createPostDto: CreatePostDto): string {
+    console.log(this.postsService.create(createPostDto));
+    return `This is the return response`;
+  }
 
-  //   this.postsService.create(createPostDto);
-  //   return `This is the return response`;
-  // }
-  // @Get(':id')
-  // findOne(@Param('id') id: number): PostInterface {
-  //   console.log(id);
-  //   return this.postsService.findOne(id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: number): Promise<PostModel> {
+    return this.postsService.findOne(Number(id));
+  }
 
-  // @Delete(':id')
-  // deleteOne(@Param('id') id: number): string {
-  //   this.postsService.deleteOne(id);
-  //   return 'item deleted';
-  // }
-  // @Put(':id')
-  // updateOne(
-  //   @Param('id') id: number,
-  //   @Body() createPostDto: CreatePostDto,
-  // ): string {
-  //   this.postsService.updateOne(id, createPostDto);
-  //   return 'item updated';
-  // }
+  @Delete(':id')
+  deleteOne(@Param('id') id: number): string {
+    this.postsService.deleteOne(Number(id));
+    return 'item deleted';
+  }
+  @Put(':id')
+  updateOne(
+    @Param('id') id: number,
+    @Body() createPostDto: CreatePostDto,
+  ): string {
+    this.postsService.updateOne(Number(id), createPostDto);
+    return 'item updated';
+  }
 }

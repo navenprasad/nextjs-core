@@ -21,6 +21,49 @@ let PostsService = exports.PostsService = class PostsService {
         console.log(post);
         return post;
     }
+    async create(createPostDto) {
+        const post = await this.prisma.post.create({
+            data: {
+                title: createPostDto.title,
+                content: createPostDto.content,
+            },
+        });
+        return post;
+    }
+    async findOne(id) {
+        const post = await this.prisma.post.findUnique({
+            where: {
+                id: id,
+            },
+        });
+        return post;
+    }
+    async deleteOne(id) {
+        const post = await this.prisma.post.delete({
+            where: {
+                id: id,
+            },
+        });
+        return post;
+    }
+    async updateOne(id, createPostDto) {
+        try {
+            const post = await this.prisma.post.update({
+                where: {
+                    id: id,
+                },
+                data: {
+                    title: createPostDto.title,
+                    content: createPostDto.content,
+                },
+            });
+            return post;
+        }
+        catch (error) {
+            console.log(error);
+            return error.meta;
+        }
+    }
 };
 exports.PostsService = PostsService = __decorate([
     (0, common_1.Injectable)(),
