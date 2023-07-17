@@ -10,23 +10,29 @@ exports.PostsService = void 0;
 const common_1 = require("@nestjs/common");
 let PostsService = exports.PostsService = class PostsService {
     constructor() {
-        this.tempPost = {
-            id: 1,
-            title: 'This is a title',
-            content: 'This is the content',
-        };
-        this.posts = [this.tempPost];
+        this.postId = 1;
+        this.posts = [];
     }
     findAll() {
         return this.posts;
     }
     create(post) {
+        post.id = this.postId;
+        this.postId++;
         this.posts.push(post);
     }
     findOne(id) {
-        const a = this.posts.find((post) => post.id == id);
-        console.log(a);
         return this.posts.find((post) => post.id == id);
+    }
+    deleteOne(id) {
+        const index = this.posts.findIndex((post) => post.id == id);
+        console.log(index);
+        this.posts.splice(index, 1);
+    }
+    updateOne(id, post) {
+        const index = this.posts.findIndex((post) => post.id == id);
+        this.posts[index] = post;
+        console.log(this.posts[index]);
     }
 };
 exports.PostsService = PostsService = __decorate([

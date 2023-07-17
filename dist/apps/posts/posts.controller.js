@@ -32,6 +32,14 @@ let PostsController = exports.PostsController = class PostsController {
         console.log(id);
         return this.postsService.findOne(id);
     }
+    deleteOne(id) {
+        this.postsService.deleteOne(id);
+        return 'item deleted';
+    }
+    updateOne(id, createPostDto) {
+        this.postsService.updateOne(id, createPostDto);
+        return 'item updated';
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -54,6 +62,21 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", posts_interface_1.Post)
 ], PostsController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", String)
+], PostsController.prototype, "deleteOne", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, create_post_dto_1.CreatePostDto]),
+    __metadata("design:returntype", String)
+], PostsController.prototype, "updateOne", null);
 exports.PostsController = PostsController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [posts_service_1.PostsService])

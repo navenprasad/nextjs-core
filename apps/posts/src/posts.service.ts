@@ -5,24 +5,32 @@ import { Post } from './interfaces/posts.interface';
 export class PostsService {
   //Array stored in memory
 
-  tempPost = {
-    id: 1,
-    title: 'This is a title',
-    content: 'This is the content',
-  };
-  private readonly posts: Post[] = [this.tempPost];
+  private postId = 1;
+  private readonly posts: Post[] = [];
 
   findAll() {
     return this.posts;
   }
 
   create(post: Post) {
+    post.id = this.postId;
+    this.postId++;
     this.posts.push(post);
   }
 
   findOne(id: number) {
-    const a = this.posts.find((post) => post.id == id);
-    console.log(a);
     return this.posts.find((post) => post.id == id);
+  }
+
+  deleteOne(id: number) {
+    const index = this.posts.findIndex((post) => post.id == id);
+    console.log(index);
+    this.posts.splice(index, 1);
+  }
+
+  updateOne(id: number, post: Post) {
+    const index = this.posts.findIndex((post) => post.id == id);
+    this.posts[index] = post;
+    console.log(this.posts[index]);
   }
 }
